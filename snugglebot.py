@@ -5,6 +5,7 @@ import asyncio
 import pyjokes
 from discord.ext import commands
 from botstorage import BotStorage
+from random import choice
 
 # Some values for setting up
 configfile = 'config.ini'
@@ -410,6 +411,14 @@ async def modes(ctx, game):
         message += mode + '\r\n'
     message += '```'
 
+    await bot.send_message(channel, message)
+    
+@bot.command(pass_context=True)
+async def choose(ctx, *choices):
+    '''Command for getting a random choise from one or more alternatives separated by space'''
+    channel = ctx.message.channel
+    message = choice(choices)
+    
     await bot.send_message(channel, message)
 
 
